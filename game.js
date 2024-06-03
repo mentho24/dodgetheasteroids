@@ -29,11 +29,23 @@ let fuelText;
 let timeText;
 let levelText;
 let bestScore = 0;
+let emitter;
 
 function preload() {
     this.load.image('background', 'Sprites/bg.png');
-    this.load.image('missile', 'Sprites/misiles.png');
+    this.load.spritesheet({
+        key: 'nave',
+        url: 'Sprites/nave.png',
+        frameConfig: {
+            frameWidth: 28,
+            frameHeight: 38,
+            startFrame: 0,
+            endFrame: 9
+        }
+    });
+    this.load.image('misil', 'Sprites/misil.png');
     this.load.image('lifeBar', 'Sprites/Lifebar.png');
+    this.load.image('disparo','Sprites/disparo.png')
     this.load.audio('music', 'sonidos/saitama.ogg');
     this.load.audio('fuelSound', 'sonidos/combustible.ogg');
     this.load.audio('missileSound', 'sonidos/misilsound.ogg');
@@ -44,7 +56,7 @@ function preload() {
 
 function create() {
     this.add.image(400, 300, 'background');
-    player = this.physics.add.sprite(100, 450, 'missile').setScale(0.5);
+    player = this.physics.add.sprite(200, 450, 'nave').setScale(2);
     player.setCollideWorldBounds(true);
 
     asteroids = this.physics.add.group();
@@ -80,6 +92,26 @@ function create() {
     });
     
     spawnAsteroids(this, 15);
+
+
+    emitter = this.add.particles('disparo').createEmitter({
+        speed: 100,
+        gravityY: 100,
+        scale: {start: 0.04, end: 0.01},
+        lifespan:1000,
+        blendMode: 'ADD'
+    });
+
+    /*emitter = this.add.particles(0,0,"disparo",{
+        speed: 100,
+        gravityY: 100,
+        scale: 0.04,
+        duration: 100,
+        emitting: false
+      })*/
+
+    emitter.startFollow(player, player.width +5, player.height/10);
+    console.log("Emitter created:", emitter);
 }
 
 function update() {
@@ -128,7 +160,7 @@ function shootAsteroid(bullet, asteroid) {
 }
 
 function shootMissile(scene) {
-    let bullet = scene.physics.add.sprite(player.x, player.y, 'missile').setScale(0.2);
+    let bullet = scene.physics.add.sprite(player.x+45, player.y, 'misil').setScale(2.5);
     bullet.setVelocityX(400);
     bullets.add(bullet);
     scene.missileSound.play();
