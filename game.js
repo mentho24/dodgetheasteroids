@@ -46,12 +46,12 @@ function preload() {
     this.load.image('misil', 'Sprites/misil.png');
     this.load.image('lifeBar', 'Sprites/Lifebar.png');
     this.load.image('disparo','Sprites/disparo.png')
-    this.load.audio('music', 'sonidos/saitama.ogg');
-    this.load.audio('fuelSound', 'sonidos/combustible.ogg');
-    this.load.audio('missileSound', 'sonidos/misilsound.ogg');
-    this.load.audio('lowFuelSound', 'sonidos/lowfuel.ogg');
-    this.load.audio('collisionSound', 'sonidos/Colision_Asteroide.ogg');
-    this.load.audio('explosionSound', 'sonidos/Explosion.ogg');
+    this.load.audio('music', 'sounds/saitama.ogg');
+    this.load.audio('fuelSound', 'sounds/combustible.ogg');
+    this.load.audio('missileSound', 'sounds/misilsound.ogg');
+    this.load.audio('lowFuelSound', 'sounds/lowfuel.ogg');
+    this.load.audio('collisionSound', 'sounds/Colision_Asteroide.ogg');
+    this.load.audio('explosionSound', 'sounds/Explosion.ogg');
 }
 
 function create() {
